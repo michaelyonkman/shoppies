@@ -8,7 +8,10 @@ function App() {
 
   const [searchVal, setSearchVal] = useState('');
   const [results, setResults] = useState([]);
-  const [nominations, setNominations] = useState([]);
+  const [nominations, setNominations] = useState(() => {
+    const localData = localStorage.getItem('nominations');
+    return localData ? JSON.parse(localData) : [];
+  });
 
   useEffect(() => {
     const fetchMovies = async (searchVal) => {
@@ -23,6 +26,10 @@ function App() {
     };
     fetchMovies(searchVal);
   }, [searchVal]);
+
+  useEffect(() => {
+    localStorage.setItem('nominations', JSON.stringify(nominations));
+  }, [nominations]);
 
   return (
     <div className="App">
