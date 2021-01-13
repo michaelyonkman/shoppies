@@ -11,7 +11,6 @@ function App() {
   const [nominations, setNominations] = useState([]);
 
   useEffect(() => {
-    console.count();
     const fetchMovies = async (searchVal) => {
       const response = await fetch(URL + searchVal);
       const status = await response.status;
@@ -38,7 +37,11 @@ function App() {
           searchVal={searchVal}
           setNominations={setNominations}
         />
-        <Nominations nominations={nominations} />
+        <Nominations
+          results={results}
+          nominations={nominations}
+          setNominations={setNominations}
+        />
       </div>
     </div>
   );

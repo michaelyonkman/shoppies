@@ -11,13 +11,16 @@ const Results = (props) => {
             <div key={movie.imdbID} className="result">
               <p>{movie.Title}</p>
               <button
-                value={JSON.stringify({ title: movie.Title, id: movie.imdbID })}
-                onClick={(e) =>
+                value={movie.imdbID}
+                onClick={(e) => {
+                  const [nominatedMovie] = props.results.filter(
+                    (movie) => movie.imdbID === e.target.value
+                  );
                   props.setNominations((prevState) => [
                     ...prevState,
-                    JSON.parse(e.target.value),
-                  ])
-                }
+                    nominatedMovie,
+                  ]);
+                }}
               >
                 Nominate
               </button>

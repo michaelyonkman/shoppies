@@ -8,9 +8,20 @@ const Nominations = (props) => {
       {props.nominations &&
         props.nominations.map((movie) => {
           return (
-            <div key={movie.id} className="nomination">
-              <h1>{movie.title}</h1>
-              <button>Remove</button>
+            <div key={movie.imdbID} className="nomination">
+              <h1>{movie.Title}</h1>
+              <button
+                value={movie.imdbID}
+                onClick={(e) => {
+                  props.setNominations(
+                    props.nominations.filter(
+                      (movie) => movie.imdbID !== e.target.value
+                    )
+                  );
+                }}
+              >
+                Remove
+              </button>
             </div>
           );
         })}
