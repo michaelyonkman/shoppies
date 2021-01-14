@@ -4,7 +4,7 @@ const Results = (props) => {
   console.log(props.results);
   return (
     <div className="results">
-      <h1>Results for "{props.searchVal}"</h1>
+      {props.results && <h1>Results for "{props.searchVal}"</h1>}
       {props.results &&
         props.results.map((movie) => {
           return (
@@ -13,13 +13,19 @@ const Results = (props) => {
               <button
                 value={movie.imdbID}
                 onClick={(e) => {
-                  const [nominatedMovie] = props.results.filter(
-                    (movie) => movie.imdbID === e.target.value
-                  );
-                  props.setNominations((prevState) => [
-                    ...prevState,
-                    nominatedMovie,
-                  ]);
+                  if (
+                    !props.nominations.some(
+                      (movie) => movie.imdbID === e.target.value
+                    )
+                  ) {
+                    const [nominatedMovie] = props.results.filter(
+                      (movie) => movie.imdbID === e.target.value
+                    );
+                    props.setNominations((prevState) => [
+                      ...prevState,
+                      nominatedMovie,
+                    ]);
+                  }
                 }}
               >
                 Nominate
