@@ -3,14 +3,16 @@ import React from 'react';
 const Nominations = (props) => {
   console.log(props.nominations);
   return (
-    <div className="nominations">
-      {props.nominations.length ? <h1>Nominations</h1> : null}
+    <div className="flex-child nominations">
+      <h2>Nominations</h2>
 
-      {props.nominations &&
+      {props.nominations.length ? (
         props.nominations.map((movie) => {
           return (
             <div key={movie.imdbID} className="nomination">
-              <h1>{movie.Title}</h1>
+              <img src={movie.Poster} alt="movie poster" />
+              <h4>{movie.Title}</h4>
+              <h5>{movie.Year}</h5>
               <button
                 value={movie.imdbID}
                 onClick={(e) => {
@@ -25,7 +27,13 @@ const Nominations = (props) => {
               </button>
             </div>
           );
-        })}
+        })
+      ) : (
+        <div>
+          <p>You have no nominations...</p>
+          <p> Get nominatin'!!!</p>
+        </div>
+      )}
     </div>
   );
 };

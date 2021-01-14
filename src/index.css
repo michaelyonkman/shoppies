@@ -1,12 +1,6 @@
-@font-face {
-  font-family: 'Roboto';
-  src: local('Roboto'),
-    url(./fonts/Roboto/Roboto-Regular.ttf) format('truetype');
-}
-
 body {
   margin: 0;
-  font-family: 'Roboto';
+  font-family: 'Julius Sans One', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #fbf7ed;
@@ -17,18 +11,34 @@ code {
     monospace;
 }
 
+.flex-container {
+  display: flex;
+  margin-top: 2em;
+}
+
+.flex-child {
+  flex: 1;
+  border: 1px solid rgb(0, 76, 63);
+  margin: 10px;
+  padding: 10px;
+  border-radius: 4px;
+  background-color: #ffffff;
+  box-shadow: 5px 10px 18px #888888;
+}
+
 .logo-text {
-  font-style: italic;
+  font-family: 'Playfair Display', serif;
+  font-size: 3em;
 }
 
 .search-bar {
-  /* height: 0.5em; */
   width: 50%;
   padding: 1em 0.9375em;
   box-shadow: 0 0 0 1px #6b7177;
   border: 1px solid transparent;
   border-radius: 4px;
   font-size: 1em;
+  /* box-shadow: 5px 10px 18px #888888; */
 }
 
 .search-bar:focus {
@@ -36,21 +46,45 @@ code {
   border: 1px solid #008060;
 }
 
+::placeholder {
+  font-family: 'Julius Sans One', sans-serif;
+}
+
 button {
   padding: 1em 1.8125em;
   border-radius: 4px;
+  font-family: 'Julius Sans One', sans-serif;
   font-weight: 700;
   font-size: 1em;
   transition: 150ms ease;
-  transition-property: background-color, border-color, box-shadow, color;
+  transition-property: background-color;
   text-align: center;
   background-color: #008060;
   box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.15);
   color: #ffffff;
   border: 1px solid transparent;
   outline: none !important;
+  box-shadow: 5px 10px 18px #888888;
 }
 
 button:hover {
   background-color: rgb(0, 76, 63);
+}
+
+button:disabled {
+  opacity: 0.2;
+}
+
+.result,
+.nomination {
+  padding: 20px;
+  margin: 10px;
+  border: 1px solid #008060;
+  border-radius: 4px;
+  background-color: #fbf7ed;
+  box-shadow: 5px 10px 18px #888888;
+}
+
+img {
+  height: 200px;
 }

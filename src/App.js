@@ -35,26 +35,28 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1 className="logo-text">the shoppies</h1>
+        <h1 className="logo-text">The Shoppies</h1>
       </header>
       <div className="search">
-        <h1>Search Movies</h1>
+        <h1>Search</h1>
         <input
           className="search-bar"
-          placeholder="Enter movie to search"
+          placeholder="Enter a movie to search"
           onChange={(e) => setSearchVal(e.target.value)}
         ></input>
-        <Results
-          results={results.Search}
-          searchVal={searchVal}
-          nominations={nominations}
-          setNominations={setNominations}
-        />
-        <Nominations
-          results={results}
-          nominations={nominations}
-          setNominations={setNominations}
-        />
+        <div className="flex-container">
+          <Results
+            results={results.Search}
+            searchVal={searchVal}
+            nominations={nominations}
+            setNominations={setNominations}
+          />
+          <Nominations
+            results={results}
+            nominations={nominations}
+            setNominations={setNominations}
+          />
+        </div>
       </div>
     </div>
   );
