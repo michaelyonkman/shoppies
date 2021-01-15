@@ -57,6 +57,7 @@ const Results = (props) => {
             pageRange={2}
             marginPagesDisplayed={2}
             onPageChange={handlePageChange}
+            activeLinkClassName={'active-page'}
             // containerClassName={'container'}
             // previousLinkClassName={'page'}
             // breakClassName={'page'}
