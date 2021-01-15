@@ -1,7 +1,6 @@
 import React from 'react';
 
 const Nominations = (props) => {
-  console.log(props.nominations);
   return (
     <div className="flex-child nominations">
       <h2>Nominations</h2>
