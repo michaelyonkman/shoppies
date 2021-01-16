@@ -2,7 +2,6 @@ import './App.css';
 import React, { useState, useEffect } from 'react';
 import Results from './Components/Results';
 import Nominations from './Components/Nominations';
-// import camera from './assets/jeremy-yap-J39X2xX_8CQ-unsplash.jpg';
 
 function App() {
   const [searchVal, setSearchVal] = useState('');

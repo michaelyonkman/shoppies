@@ -1,14 +1,15 @@
 import React from 'react';
 import ReactPaginate from 'react-paginate';
-import film from '../assets/anika-mikkelson-dWYjy9zIiF8-unsplash.jpg';
+import imageNA from '../assets/imageNA.jpg';
 
 const Results = (props) => {
+  console.log(props.results);
   const handlePageChange = (selectedObject) => {
     props.setCurrentPage(selectedObject.selected);
   };
 
   const addDefaultSrc = (event) => {
-    event.target.src = film;
+    event.target.src = imageNA;
   };
   return (
     <div className="flex-child results">
