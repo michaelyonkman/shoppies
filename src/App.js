@@ -1,10 +1,12 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
-import Results from './Components/Results';
-import Nominations from './Components/Nominations';
+import Search from './components/Search';
+import Results from './components/Results';
+import Nominations from './components/Nominations';
+import Modal from 'react-bootstrap/Modal';
 
 function App() {
-  const [searchVal, setSearchVal] = useState('');
+  const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
   const [pageCount, setPageCount] = useState(1);
   const [currentPage, setCurrentPage] = useState(0);
@@ -12,13 +14,15 @@ function App() {
     const localData = localStorage.getItem('nominations');
     return localData ? JSON.parse(localData) : [];
   });
-
-  const fetchMovies = async (searchVal, currentPage) => {
-    console.log(searchVal, currentPage);
+  const [modalVisible, setModalVisible] = useState(false);
+  const handleClose = () => setModalVisible(false);
+  const handleShow = () => setModalVisible(true);
+  const fetchMovies = async (query, currentPage) => {
+    console.log(query, currentPage);
     const response = await fetch(
       `http://www.omdbapi.com/?apikey=${
         process.env.REACT_APP_API_KEY
-      }&type=movie&s=${searchVal}&page=${currentPage + 1}`
+      }&type=movie&s=${query}&page=${currentPage + 1}`
     );
     if (response.ok) {
       const data = await response.json();
@@ -30,13 +34,13 @@ function App() {
   };
 
   const handleQueryChange = (event) => {
-    setSearchVal(event.target.value);
+    setQuery(event.target.value);
     setCurrentPage(0);
   };
 
   useEffect(() => {
-    fetchMovies(searchVal, currentPage);
-  }, [searchVal, currentPage]);
+    fetchMovies(query, currentPage);
+  }, [query, currentPage]);
 
   useEffect(() => {
     localStorage.setItem('nominations', JSON.stringify(nominations));
@@ -47,17 +51,8 @@ function App() {
       <header className="App-header">
         <h1 className="logo-text">The Shoppies</h1>
       </header>
-      {/* <div>
-        <img src={camera} alt="vintage movie countdown" />
-      </div> */}
-      <div className="search">
-        <h1>Search</h1>
-        <input
-          className="search-bar"
-          placeholder="Enter a movie to search"
-          onChange={(e) => handleQueryChange(e)}
-        ></input>
-
+      <div className="app-container">
+        <Search handleQueryChange={handleQueryChange} />
         <div className="flex-container">
           <Results
             results={results}
@@ -66,6 +61,7 @@ function App() {
             fetchMovies={fetchMovies}
             setCurrentPage={setCurrentPage}
             pageCount={pageCount}
+            setModalVisible={handleShow}
           />
           <Nominations
             results={results}
@@ -73,6 +69,22 @@ function App() {
             setNominations={setNominations}
           />
         </div>
+        <>
+          <Modal show={modalVisible} onHide={handleClose}>
+            <Modal.Header>
+              <Modal.Title style={{ textDecoration: 'underline #008060' }}>
+                Submit nominations?
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              You've reached 5 nominations. Are you ready to submit?
+            </Modal.Body>
+            <Modal.Footer>
+              <button onClick={handleClose}>Edit</button>
+              <button onClick={handleClose}>Submit</button>
+            </Modal.Footer>
+          </Modal>
+        </>
       </div>
     </div>
   );

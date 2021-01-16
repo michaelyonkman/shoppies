@@ -1,6 +1,11 @@
 import React from 'react';
 
 const Nominations = (props) => {
+  const handleClick = (e) => {
+    props.setNominations(
+      props.nominations.filter((movie) => movie.imdbID !== e.target.value)
+    );
+  };
   return (
     <div className="flex-child nominations">
       <h2>Nominations</h2>
@@ -12,16 +17,7 @@ const Nominations = (props) => {
               <img src={movie.Poster} alt="movie poster" />
               <h4>{movie.Title}</h4>
               <h5>{movie.Year}</h5>
-              <button
-                value={movie.imdbID}
-                onClick={(e) => {
-                  props.setNominations(
-                    props.nominations.filter(
-                      (movie) => movie.imdbID !== e.target.value
-                    )
-                  );
-                }}
-              >
+              <button value={movie.imdbID} onClick={handleClick}>
                 Remove
               </button>
             </div>
@@ -29,8 +25,7 @@ const Nominations = (props) => {
         })
       ) : (
         <div>
-          <p>You have no nominations...</p>
-          <p> Get nominatin'!!!</p>
+          <p>No nominations</p>
         </div>
       )}
     </div>

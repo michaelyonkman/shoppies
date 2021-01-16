@@ -3,7 +3,20 @@ import ReactPaginate from 'react-paginate';
 import imageNA from '../assets/imageNA.jpg';
 
 const Results = (props) => {
-  console.log(props.results);
+  const handleClick = (e) => {
+    console.log(props.nominations);
+    if (props.nominations.length < 5) {
+      const [nominatedMovie] = props.results.Search.filter(
+        (movie) => movie.imdbID === e.target.value
+      );
+      props.setNominations((prevState) => [...prevState, nominatedMovie]);
+      if (props.nominations.length === 4) {
+        props.setModalVisible(true);
+      }
+    } else {
+      props.setModalVisible(true);
+    }
+  };
   const handlePageChange = (selectedObject) => {
     props.setCurrentPage(selectedObject.selected);
   };
@@ -27,15 +40,7 @@ const Results = (props) => {
               <h5>{movie.Year}</h5>
               <button
                 value={movie.imdbID}
-                onClick={(e) => {
-                  const [nominatedMovie] = props.results.Search.filter(
-                    (movie) => movie.imdbID === e.target.value
-                  );
-                  props.setNominations((prevState) => [
-                    ...prevState,
-                    nominatedMovie,
-                  ]);
-                }}
+                onClick={handleClick}
                 disabled={props.nominations.some(
                   (nomination) => movie.imdbID === nomination.imdbID
                 )}
@@ -47,8 +52,7 @@ const Results = (props) => {
         })
       ) : (
         <div>
-          <p>No results so far...</p>
-          <p> Try searching for your favorite movie!!!</p>
+          <p>No results</p>
         </div>
       )}
       {props.results.Search && (
@@ -59,13 +63,6 @@ const Results = (props) => {
             marginPagesDisplayed={2}
             onPageChange={handlePageChange}
             activeLinkClassName={'active-page'}
-            // containerClassName={'container'}
-            // previousLinkClassName={'page'}
-            // breakClassName={'page'}
-            // nextLinkClassName={'page'}
-            // pageClassName={'page'}
-            // disabledClassNae={'disabled'}
-            // activeClassName={'active'}
           />
         </div>
       )}
