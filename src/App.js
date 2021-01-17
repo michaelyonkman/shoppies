@@ -27,7 +27,7 @@ function App() {
   const fetchMovies = async (query, currentPage) => {
     console.log(query, currentPage);
     const response = await fetch(
-      `http://www.omdbapi.com/?apikey=${
+      `https://www.omdbapi.com/?apikey=${
         process.env.REACT_APP_API_KEY
       }&type=movie&s=${query}&page=${currentPage + 1}`
     );
