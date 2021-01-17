@@ -1,3 +1,13 @@
+# The Shoppies
+
+A single-page web app built with React to nominate your favorite movies for The Shoppies!
+
+## Getting Started
+
+To run this app fork and clone this repository, `npm install` and then `npm start`.
+
+Have fun film buffs!!!
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

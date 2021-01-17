@@ -1,3 +1,45 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  background-color: #ffffff;
+  border-bottom: 1px solid rgb(0, 76, 63);
+  margin-bottom: 1em;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: rgb(0, 76, 63);
+}
+
+.logo-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 3em;
+}
+
+.intro {
+  padding: 2em;
+}
+
+.intro h4 {
+  text-decoration: underline;
+  text-decoration-color: #008060;
+}
+
+.highlight-text {
+  text-decoration: underline;
+  text-decoration-color: #008060;
+  font-weight: bold;
+}
+
 body {
   margin: 0;
   font-family: 'Julius Sans One', sans-serif;
@@ -6,14 +48,28 @@ body {
   background-color: #fbf7ed;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.search h2 {
+  text-decoration: underline;
+  text-decoration-color: #008060;
 }
 
-.flex-container {
-  display: flex;
-  margin-top: 2em;
+.search-bar {
+  width: 80%;
+  padding: 1em 0.9375em;
+  box-shadow: 0 0 0 1px #6b7177;
+  border: 1px solid black;
+  border-radius: 4px;
+  font-size: 1em;
+  box-shadow: 5px 10px 18px #888888;
+}
+
+.search-bar:focus {
+  outline: none !important;
+  border: 1px solid #008060;
+}
+
+::placeholder {
+  font-family: 'Julius Sans One', sans-serif;
 }
 
 .flex-child {
@@ -26,36 +82,9 @@ code {
   box-shadow: 5px 10px 18px #888888;
 }
 
-.logo-text {
-  font-family: 'Playfair Display', serif;
-  font-size: 3em;
-}
-
-.search h1 {
-  text-decoration: underline #008060;
-}
-
-.search-bar {
-  width: 50%;
-  padding: 1em 0.9375em;
-  box-shadow: 0 0 0 1px #6b7177;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  font-size: 1em;
-  /* box-shadow: 5px 10px 18px #888888; */
-}
-
-.search-bar:focus {
-  outline: none !important;
-  border: 1px solid #008060;
-}
-
-::placeholder {
-  font-family: 'Julius Sans One', sans-serif;
-}
-
 button {
   padding: 1em 1.8125em;
+  margin-top: 0.5em;
   border-radius: 4px;
   font-family: 'Julius Sans One', sans-serif;
   font-weight: 700;
@@ -89,14 +118,21 @@ button:disabled {
   box-shadow: 5px 10px 18px #888888;
 }
 
+.message {
+  margin-top: 2em;
+  color: #888888;
+}
+
 img {
   height: 200px;
   width: 150px;
+  margin-bottom: 1.5em;
   border-radius: 4px;
   box-shadow: 5px 10px 18px #888888;
 }
 
-h2 {
+.results h3,
+.nominations h3 {
   text-decoration: underline;
   text-decoration-color: #008060;
 }
@@ -122,6 +158,7 @@ li a {
   text-align: center;
   padding: 16px;
   text-decoration: none;
+  color: black;
 }
 
 li a:hover {
@@ -137,4 +174,69 @@ li a:focus {
 .active-page {
   font-weight: bold;
   text-decoration: underline #008060;
+}
+
+@media only screen and (min-width: 768px) {
+  .flex-container {
+    display: flex;
+    margin-top: 2em;
+  }
+
+  .search-bar {
+    width: 50%;
+  }
+}
+
+.result,
+.nomination {
+  -webkit-animation: fadein 1s;
+  -moz-animation: fadein 1s;
+  -ms-animation: fadein 1s;
+  -o-animation: fadein 1s;
+  animation: fadein 1s;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@-ms-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@-o-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

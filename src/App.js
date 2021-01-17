@@ -1,4 +1,3 @@
-import './App.css';
 import React, { useState, useEffect } from 'react';
 import Search from './components/Search';
 import Results from './components/Results';
@@ -8,15 +7,23 @@ import Modal from 'react-bootstrap/Modal';
 function App() {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
+  //state for pagination
   const [pageCount, setPageCount] = useState(1);
   const [currentPage, setCurrentPage] = useState(0);
+  //state for nominations and retrieving nominations from local storage
   const [nominations, setNominations] = useState(() => {
     const localData = localStorage.getItem('nominations');
     return localData ? JSON.parse(localData) : [];
   });
+  //state for modal visibility
   const [modalVisible, setModalVisible] = useState(false);
   const handleClose = () => setModalVisible(false);
   const handleShow = () => setModalVisible(true);
+  const handleSubmit = () => {
+    setNominations([]);
+    setModalVisible(false);
+  };
+  //async request to fetch movies on query change
   const fetchMovies = async (query, currentPage) => {
     console.log(query, currentPage);
     const response = await fetch(
@@ -32,16 +39,16 @@ function App() {
       throw Error(response.statusText);
     }
   };
-
+  //updating state on query change
   const handleQueryChange = (event) => {
     setQuery(event.target.value);
     setCurrentPage(0);
   };
-
+  //refetching data on every change of query value and setting current page back to 1
   useEffect(() => {
     fetchMovies(query, currentPage);
   }, [query, currentPage]);
-
+  //storing nominations in local storage with each new addition
   useEffect(() => {
     localStorage.setItem('nominations', JSON.stringify(nominations));
   }, [nominations]);
@@ -51,6 +58,18 @@ function App() {
       <header className="App-header">
         <h1 className="logo-text">The Shoppies</h1>
       </header>
+      <div className="intro">
+        <h4>Welcome to The Shoppies!!!</h4>
+        <p>
+          We value your opinion and want{' '}
+          <span className="highlight-text">you</span> to help us choose the
+          winners of this prestigious award. Search and select five of your
+          favourite movies of all time and add them to your nominations list.
+          Once you've added five movies you'll be given the option to either
+          submit if you're done, or edit your list to make changes.{' '}
+          <span className="highlight-text">Happy nominating!</span>
+        </p>
+      </div>
       <div className="app-container">
         <Search handleQueryChange={handleQueryChange} />
         <div className="flex-container">
@@ -58,13 +77,11 @@ function App() {
             results={results}
             nominations={nominations}
             setNominations={setNominations}
-            fetchMovies={fetchMovies}
             setCurrentPage={setCurrentPage}
             pageCount={pageCount}
             setModalVisible={handleShow}
           />
           <Nominations
-            results={results}
             nominations={nominations}
             setNominations={setNominations}
           />
@@ -81,7 +98,7 @@ function App() {
             </Modal.Body>
             <Modal.Footer>
               <button onClick={handleClose}>Edit</button>
-              <button onClick={handleClose}>Submit</button>
+              <button onClick={handleSubmit}>Submit</button>
             </Modal.Footer>
           </Modal>
         </>

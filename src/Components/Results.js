@@ -3,8 +3,8 @@ import ReactPaginate from 'react-paginate';
 import imageNA from '../assets/imageNA.jpg';
 
 const Results = (props) => {
+  //function to add movie to nominations list, but only if there are fewer than 5 current nominations. Otherwise modal will be shown.
   const handleClick = (e) => {
-    console.log(props.nominations);
     if (props.nominations.length < 5) {
       const [nominatedMovie] = props.results.Search.filter(
         (movie) => movie.imdbID === e.target.value
@@ -17,16 +17,17 @@ const Results = (props) => {
       props.setModalVisible(true);
     }
   };
+  //pagination logic to change current page view
   const handlePageChange = (selectedObject) => {
     props.setCurrentPage(selectedObject.selected);
   };
-
+  //add default src for broken images
   const addDefaultSrc = (event) => {
     event.target.src = imageNA;
   };
   return (
     <div className="flex-child results">
-      <h2>Results</h2>
+      <h3>Results</h3>
       {props.results.Search ? (
         props.results.Search.map((movie) => {
           return (
@@ -36,8 +37,8 @@ const Results = (props) => {
                 alt="movie poster"
                 onError={addDefaultSrc}
               />
-              <h4>{movie.Title}</h4>
-              <h5>{movie.Year}</h5>
+              <h5>{movie.Title}</h5>
+              <p>{movie.Year}</p>
               <button
                 value={movie.imdbID}
                 onClick={handleClick}
@@ -52,15 +53,15 @@ const Results = (props) => {
         })
       ) : (
         <div>
-          <p>No results</p>
+          <p className="message">No results</p>
         </div>
       )}
       {props.results.Search && (
         <div className="paginate">
           <ReactPaginate
             pageCount={props.pageCount}
-            pageRange={2}
-            marginPagesDisplayed={2}
+            pageRangeDisplayed={1}
+            marginPagesDisplayed={1}
             onPageChange={handlePageChange}
             activeLinkClassName={'active-page'}
           />
