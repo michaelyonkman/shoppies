@@ -25,18 +25,19 @@ function App() {
   };
   //async request to fetch movies on query change
   const fetchMovies = async (query, currentPage) => {
-    console.log(query, currentPage);
-    const response = await fetch(
-      `https://www.omdbapi.com/?apikey=${
-        process.env.REACT_APP_API_KEY
-      }&type=movie&s=${query}&page=${currentPage + 1}`
-    );
-    if (response.ok) {
-      const data = await response.json();
-      setResults(data);
-      setPageCount(Math.ceil(Number(data.totalResults) / 10));
-    } else {
-      throw Error(response.statusText);
+    if (query.length >= 3) {
+      const response = await fetch(
+        `https://www.omdbapi.com/?apikey=${
+          process.env.REACT_APP_API_KEY
+        }&type=movie&s=${query}&page=${currentPage + 1}`
+      );
+      if (response.ok) {
+        const data = await response.json();
+        setResults(data);
+        setPageCount(Math.ceil(Number(data.totalResults) / 10));
+      } else {
+        throw Error(response.statusText);
+      }
     }
   };
   //updating state on query change
