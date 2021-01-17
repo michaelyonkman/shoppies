@@ -5,14 +5,12 @@ import imageNA from '../assets/imageNA.jpg';
 const Results = (props) => {
   //function to add movie to nominations list, but only if there are fewer than 5 current nominations. Otherwise modal will be shown.
   const handleClick = (e) => {
-    if (props.nominations.length < 5) {
-      const [nominatedMovie] = props.results.Search.filter(
-        (movie) => movie.imdbID === e.target.value
-      );
-      props.setNominations((prevState) => [...prevState, nominatedMovie]);
-      if (props.nominations.length === 4) {
-        props.setModalVisible(true);
-      }
+    const [nominatedMovie] = props.results.Search.filter(
+      (movie) => movie.imdbID === e.target.value
+    );
+    props.setNominations((prevState) => [...prevState, nominatedMovie]);
+    if (props.nominations.length === 4) {
+      props.setModalVisible(true);
     } else {
       props.setModalVisible(true);
     }
