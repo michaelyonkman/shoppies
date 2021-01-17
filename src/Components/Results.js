@@ -3,7 +3,7 @@ import ReactPaginate from 'react-paginate';
 import imageNA from '../assets/imageNA.jpg';
 
 const Results = (props) => {
-  //function to add movie to nominations list, but only if there are fewer than 5 current nominations. Otherwise modal will be shown.
+  //function to add movie to nominations list, but only if there are fewer than 5 current nominations, otherwise modal will be shown.
   const handleClick = (e) => {
     const [nominatedMovie] = props.results.Search.filter(
       (movie) => movie.imdbID === e.target.value
