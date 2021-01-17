@@ -12,9 +12,9 @@ const Results = (props) => {
       props.setNominations((prevState) => [...prevState, nominatedMovie]);
       if (props.nominations.length === 4) {
         props.setModalVisible(true);
-      } else {
-        props.setModalVisible(true);
       }
+    } else {
+      props.setModalVisible(true);
     }
   };
   //pagination logic to change current page view
